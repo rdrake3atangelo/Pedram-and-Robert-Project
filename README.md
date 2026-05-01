@@ -19,8 +19,8 @@ The framework includes four primary detection use cases:
 
 ```text
 datasets/
-  synthetic/     Synthetic exfiltration test dataset
-  benign/        Benign validation dataset
+  synthetic_dataset/     Synthetic exfiltration test dataset
+  benign_dataset/        Benign validation dataset
 
 detections/
   SPL detection rules, reusable macro, and threshold configuration
@@ -33,7 +33,6 @@ playbooks/
 
 evaluation/
   Evaluation results, test catalog, and tuning log
-
 ```
 
 ## Key Artifacts

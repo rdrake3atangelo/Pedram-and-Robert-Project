@@ -22,6 +22,12 @@ datasets/
   synthetic_dataset/     Synthetic exfiltration test dataset
   benign_dataset/        Benign validation dataset
 
+docs/
+  project_proposal/  Original project proposal
+  project_design/    Project design document
+  presentation/      Final presentation slides
+  progress_reports/  Progress reports 1–5
+
 detections/
   SPL detection rules, reusable macro, and threshold configuration
 
@@ -54,6 +60,14 @@ evaluation/
 - `evaluation/eval_results.md`
 - `evaluation/tuning_log.md`
 - `evaluation/test_catalog.xlsx`
+- `docs/project_proposal/Proposal.pdf`
+- `docs/project_design/Project Design.pdf`
+- `docs/presentation/DLP Presentation.pptx`
+- `docs/progress_reports/Progress Report 1.pdf`
+- `docs/progress_reports/Progress Report 2.pdf`
+- `docs/progress_reports/Progress Report 3.pdf`
+- `docs/progress_reports/Progress Report 4.docx`
+- `docs/progress_reports/Progress Report 5.pdf`
 
 ## Evaluation Summary
 

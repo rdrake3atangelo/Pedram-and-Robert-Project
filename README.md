@@ -33,3 +33,34 @@ playbooks/
 
 evaluation/
   Evaluation results, test catalog, and tuning log
+
+```
+
+## Key Artifacts
+
+- `detections/uc1_high_volume.spl`
+- `detections/uc2_unsanctioned.spl`
+- `detections/uc3_dns_exfil.spl`
+- `detections/uc4_email_exfil.spl`
+- `detections/calc_entropy.spl`
+- `detections/thresholds.conf`
+- `lookups/asset_inventory.csv`
+- `lookups/authorized_senders.csv`
+- `lookups/sanctioned_services.csv`
+- `lookups/unsanctioned_domains.csv`
+- `playbooks/playbook_pb1.md`
+- `playbooks/playbook_pb2.md`
+- `playbooks/playbook_pb3.md`
+- `playbooks/playbook_pb4.md`
+- `evaluation/eval_results.md`
+- `evaluation/tuning_log.md`
+- `evaluation/test_catalog.xlsx`
+
+## Evaluation Summary
+
+The final evaluation demonstrated 100% recall across all simulated exfiltration scenarios and 94% overall precision. All four detection rules met the 30-second query performance target during testing.
+
+## Privacy Note
+
+All datasets used in this repository are synthetic or anonymized. No real production data is included.
+

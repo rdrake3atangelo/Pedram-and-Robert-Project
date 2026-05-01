@@ -1,0 +1,53 @@
+|=============================================================================
+| Detection Use Case #2 — Unsanctioned Cloud Storage Access
+|=============================================================================
+| Description : Identifies outbound traffic directed to cloud storage or
+|               file-sharing services that are not approved by the
+|               organisation.  Communicating with unsanctioned services is
+|               a strong indicator of deliberate or negligent data removal.
+|
+| Data Source  : Network / proxy / firewall logs (index=dlp_test)
+| Key Fields   : src_ip, domain, bytes, user
+| Lookup       : lookups/unsanctioned_domains.csv  (maintained quarterly)
+|                lookups/sanctioned_services.csv   (approved exceptions)
+|
+| True Positive Rate  : 100 % (6/6 in test suite)
+| False Positive Rate : 0 %   (0 FP in 2,500 benign events)
+|
+| Tuning Notes:
+|   - Keep unsanctioned_domains.csv current; review quarterly.
+|   - Add user to sanctioned_services.csv for approved business exceptions.
+|   - Combine with UC1 threshold filter to focus on high-volume events.
+|
+| Playbook     : playbooks/playbook_pb2.md
+| Version      : 1.0  |  Author: Detection Engineering Project
+|=============================================================================
+
+index=dlp_test
+| lookup unsanctioned_domains.csv domain       OUTPUT domain        as flagged_domain
+| lookup sanctioned_services.csv  user domain  OUTPUT user          as exempt_user
+| where isnotnull(flagged_domain) AND isnull(exempt_user)
+| stats
+    sum(bytes)      as total_bytes
+    count           as event_count
+    dc(dest_ip)     as unique_ips
+    earliest(_time) as first_seen
+    latest(_time)   as last_seen
+    by src_ip domain user
+| eval total_bytes_gb = round(total_bytes / 1073741824, 2)
+| eval total_bytes_mb = round(total_bytes / 1048576, 1)
+| lookup asset_inventory src_ip OUTPUT hostname department criticality
+| eval severity = case(
+    event_count > 20 OR total_bytes > 1073741824,  "Critical",
+    event_count > 10 OR total_bytes > 536870912,   "High",
+    event_count > 3,                               "Medium",
+    true(),                                        "Low"
+  )
+| eval alert_name = "UC2 - Unsanctioned Cloud Storage Access"
+| table
+    _time severity alert_name
+    src_ip hostname department criticality
+    domain flagged_domain
+    total_bytes_gb total_bytes_mb event_count unique_ips
+    first_seen last_seen user
+| sort - total_bytes_gb

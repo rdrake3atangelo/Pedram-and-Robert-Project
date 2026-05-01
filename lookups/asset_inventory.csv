@@ -1,0 +1,19 @@
+src_ip,hostname,department,owner_user,criticality,asset_type,os,location,notes
+10.0.0.1,dc01.company.com,IT Infrastructure,it-admin,Critical,Domain Controller,Windows Server 2022,HQ-DC,Primary domain controller - alert immediately
+10.0.0.2,dc02.company.com,IT Infrastructure,it-admin,Critical,Domain Controller,Windows Server 2022,HQ-DC,Secondary domain controller
+10.0.0.3,fileserver01.company.com,IT Infrastructure,it-admin,Critical,File Server,Windows Server 2022,HQ-Storage,Primary file server - high sensitivity
+10.0.0.4,mailserver01.company.com,IT Infrastructure,it-admin,Critical,Mail Server,Windows Server 2022,HQ-DC,Exchange mail server
+10.0.0.5,ws-alice.company.com,Engineering,alice,Medium,Workstation,Windows 11,HQ-Floor2,Developer workstation
+10.0.0.6,ws-bob.company.com,Sales,bob,Low,Workstation,Windows 11,HQ-Floor1,Sales rep workstation
+10.0.0.7,monitoring01.company.com,IT Infrastructure,it-ops,Low,Monitoring Agent,Linux Ubuntu 24.04,HQ-Server,Network monitoring tool - generates high DNS (expected)
+10.0.0.8,ws-carol.company.com,Finance,carol,High,Workstation,Windows 11,HQ-Floor3,Finance - handles sensitive financial data
+10.0.0.9,ws-dave.company.com,HR,dave,High,Workstation,Windows 11,HQ-Floor3,HR - handles PII data
+10.0.0.10,ws-eve.company.com,Legal,eve,High,Workstation,macOS Ventura,HQ-Floor4,Legal - attorney-client privilege materials
+10.0.0.11,ws-frank.company.com,Marketing,frank,Low,Workstation,Windows 11,HQ-Floor1,Marketing - bulk email sender (authorized)
+10.0.0.12,ws-grace.company.com,Engineering,grace,Medium,Workstation,macOS Sonoma,HQ-Floor2,Developer - cloud storage access flagged
+10.0.0.13,ws-henry.company.com,Sales,henry,Low,Workstation,Windows 11,Remote,Remote sales rep
+10.0.0.14,ws-ivan.company.com,Engineering,ivan,Medium,Workstation,Linux Ubuntu 24.04,HQ-Floor2,Developer - DNS tunneling confirmed in test
+10.0.0.15,ws-judy.company.com,Executive,judy,Critical,Workstation,macOS Sonoma,HQ-Floor5,C-suite - immediate escalation required
+10.0.0.19,ws-mallory.company.com,Contractor,mallory,Medium,Workstation,Windows 11,HQ-Floor1,Contractor - limited access
+10.0.0.22,ws-oscar.company.com,Engineering,oscar,Medium,Workstation,Windows 11,HQ-Floor2,Developer
+10.0.0.31,ws-pat.company.com,IT Infrastructure,pat,High,Admin Workstation,Windows 11,HQ-Server,IT admin workstation - elevated privileges

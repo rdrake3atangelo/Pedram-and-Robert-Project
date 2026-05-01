@@ -1,0 +1,14 @@
+domain,service_name,category,approved_for,approved_by,date_approved,max_daily_upload_gb,notes
+sharepoint.com,Microsoft SharePoint,Cloud Storage,All employees,IT Director,2025-09-01,50,Primary document collaboration platform
+onedrive.live.com,Microsoft OneDrive,Cloud Storage,All employees,IT Director,2025-09-01,50,Bundled with M365 - approved
+office365.com,Microsoft 365,Productivity Suite,All employees,IT Director,2025-09-01,100,Core productivity platform
+teams.microsoft.com,Microsoft Teams,Collaboration,All employees,IT Director,2025-09-01,25,Approved file sharing within Teams
+google.com,Google Workspace,Productivity Suite,Engineering Dept only,CTO,2025-10-15,25,Engineering team exception - approved
+drive.google.com,Google Drive,Cloud Storage,Engineering Dept only,CTO,2025-10-15,25,Engineering team exception - approved
+github.com,GitHub,Code Repository,Engineering Dept only,CTO,2025-09-01,10,Source code only - no sensitive data
+gitlab.com,GitLab,Code Repository,Engineering Dept only,CTO,2025-11-01,10,Engineering exception - approved
+box.com,Box Enterprise,Cloud Storage,Legal Dept only,General Counsel,2025-09-01,20,Legal document management - approved
+salesforce.com,Salesforce CRM,CRM,Sales Dept,VP Sales,2025-09-01,5,CRM data only
+zendesk.com,Zendesk,Customer Support,Support Dept,VP Operations,2025-09-01,5,Support ticket attachments only
+zoom.us,Zoom,Video Conferencing,All employees,IT Director,2025-09-01,2,Meeting recordings via approved integration only
+docusign.com,DocuSign,eSignature,Legal Finance HR,General Counsel,2025-09-01,1,Contract signing only

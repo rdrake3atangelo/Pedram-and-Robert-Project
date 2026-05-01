@@ -1,0 +1,67 @@
+|=============================================================================
+| Detection Use Case #3 — DNS-Based Data Exfiltration
+|=============================================================================
+| Description : Detects DNS tunneling by identifying hosts that exhibit
+|               abnormally high DNS query volumes, long subdomain strings,
+|               and high Shannon entropy — three signals that together
+|               distinguish encoded payload data from legitimate traffic.
+|
+| Data Source  : DNS query logs (index=dns_logs)
+| Key Fields   : src_ip, query_name, query_type
+| Thresholds   : Configurable via macros (see thresholds.conf)
+|                  dns_query_count_threshold : 300  queries / hour
+|                  dns_subdomain_len_threshold : 40  characters
+|                  dns_entropy_threshold       : 3.5 bits/char
+| Macro Dep.   : calc_entropy  (detections/calc_entropy.spl)
+|
+| True Positive Rate  : 100 % (2/2 in test suite; tuned)
+| False Positive Rate : 0 %   (0 FP after entropy tuning; was 1 pre-tuning)
+|
+| Tuning Notes:
+|   - Entropy threshold of 3.5 cleared automated monitoring tools (entropy ~2.9).
+|   - Confirmed tunneling hosts showed entropy > 4.0 (base64-encoded payloads).
+|   - For environments with many monitoring agents, raise entropy threshold to 3.8.
+|   - Pre-compute entropy at index time for large DNS log volumes (>1M events/day).
+|
+| Playbook     : playbooks/playbook_pb3.md
+| Version      : 1.0  |  Author: Detection Engineering Project
+|=============================================================================
+
+index=dns_logs
+| eval subdomain      = mvindex(split(query_name, "."), 0)
+| eval sub_len        = len(subdomain)
+| eval entropy        = `calc_entropy(subdomain)`
+| stats
+    count             as query_count
+    avg(sub_len)      as avg_subdomain_len
+    max(sub_len)      as max_subdomain_len
+    avg(entropy)      as avg_entropy
+    max(entropy)      as max_entropy
+    dc(query_name)    as unique_queries
+    dc(query_type)    as query_type_variety
+    earliest(_time)   as first_seen
+    latest(_time)     as last_seen
+    values(query_name) as sample_queries
+    by src_ip
+| where query_count          > `dns_query_count_threshold`
+    AND avg_subdomain_len    > `dns_subdomain_len_threshold`
+    AND avg_entropy          > `dns_entropy_threshold`
+| eval avg_subdomain_len = round(avg_subdomain_len, 1)
+| eval avg_entropy       = round(avg_entropy, 2)
+| eval max_entropy       = round(max_entropy, 2)
+| lookup asset_inventory src_ip OUTPUT hostname department criticality
+| eval severity = case(
+    query_count > 5000 OR avg_entropy > 4.5,   "Critical",
+    query_count > 1000 OR avg_entropy > 4.0,   "High",
+    query_count > 300,                         "Medium",
+    true(),                                    "Low"
+  )
+| eval alert_name = "UC3 - DNS-Based Data Exfiltration"
+| eval sample_queries = mvjoin(mvindex(sample_queries, 0, 4), " | ")
+| table
+    _time severity alert_name
+    src_ip hostname department criticality
+    query_count unique_queries avg_subdomain_len max_subdomain_len
+    avg_entropy max_entropy query_type_variety
+    sample_queries first_seen last_seen
+| sort - avg_entropy

@@ -1,0 +1,7 @@
+user,domain,approved_send_limit,approval_reason,approved_by,expiry_date,notes
+marketing@company.com,*,500,Quarterly newsletter campaign - approved bulk send,CISO,2026-06-30,Review before renewal
+sales-ops@company.com,*,300,CRM automated outreach sequences,VP Sales,2026-06-30,Salesforce integration
+newsletters@company.com,*,10000,Company-wide newsletter distribution list,CISO,2026-12-31,Mailchimp integration - monitored
+alerts@company.com,*,1000,System alert notifications to customers,IT Director,2026-12-31,Automated system account
+noreply@company.com,*,5000,Transactional email (receipts invoices confirmations),CISO,2026-12-31,SendGrid integration
+hr-comms@company.com,*,500,HR announcements and benefits communications,HR Director,2026-09-30,Seasonal spikes expected during open enrollment

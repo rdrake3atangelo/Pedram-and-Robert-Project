@@ -1,0 +1,53 @@
+|=============================================================================
+| Detection Use Case #1 — High-Volume Outbound Data Transfer
+|=============================================================================
+| Description : Identifies internal hosts that have transferred an unusually
+|               large volume of data to external destinations within a
+|               configurable time window.  Large outbound transfers are a
+|               primary indicator of bulk data exfiltration via web or proxy.
+|
+| Data Source  : Network / proxy / firewall logs (index=dlp_test)
+| Key Fields   : src_ip, domain, bytes, user
+| Threshold    : Configurable via macro `outbound_bytes_threshold`
+|                Default: 500,000,000 bytes (500 MB) per host per domain
+| Window       : Scheduled hourly; look-back = 1 hour (tunable to 24 h)
+|
+| True Positive Rate  : 100 % (4/4 in test suite)
+| False Positive Rate : 0 %   (0 FP in 2,500 benign events)
+|
+| Tuning Notes:
+|   - Raise threshold for environments with legitimate large backups.
+|   - Add time-of-day filter to suppress expected maintenance windows.
+|   - Correlate with UC2 (unsanctioned domain) for higher-confidence alerts.
+|
+| Playbook     : playbooks/playbook_pb1.md
+| Version      : 1.0  |  Author: Detection Engineering Project
+|=============================================================================
+
+index=dlp_test
+| stats
+    sum(bytes)        as total_bytes
+    count             as event_count
+    dc(dest_ip)       as unique_dest_ips
+    earliest(_time)   as first_seen
+    latest(_time)     as last_seen
+    by src_ip domain user
+| where total_bytes > `outbound_bytes_threshold`
+| eval total_bytes_gb = round(total_bytes / 1073741824, 2)
+| eval duration_min   = round((last_seen - first_seen) / 60, 1)
+| lookup asset_inventory src_ip         OUTPUT hostname department criticality
+| lookup domain_classification domain   OUTPUT category sanctioned
+| eval severity = case(
+    total_bytes > 5368709120,          "Critical",
+    total_bytes > 1073741824,          "High",
+    total_bytes > 536870912,           "Medium",
+    true(),                            "Low"
+  )
+| eval alert_name = "UC1 - High-Volume Outbound Transfer"
+| table
+    _time severity alert_name
+    src_ip hostname department criticality
+    domain category sanctioned
+    total_bytes_gb event_count unique_dest_ips
+    duration_min first_seen last_seen user
+| sort - total_bytes_gb

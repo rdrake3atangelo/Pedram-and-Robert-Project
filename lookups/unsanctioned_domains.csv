@@ -1,0 +1,21 @@
+domain,category,risk_level,notes,date_added,added_by
+dropbox.com,Cloud Storage,High,Consumer Dropbox - not approved for corporate data,2026-01-15,Security Team
+mega.nz,Cloud Storage,Critical,End-to-end encrypted - forensic recovery not possible,2026-01-15,Security Team
+wetransfer.com,File Transfer,High,No authentication required for recipient,2026-01-15,Security Team
+transfer.sh,File Transfer,Critical,Anonymous CLI-based file transfer service,2026-01-15,Security Team
+anonfiles.com,File Sharing,Critical,Anonymous file hosting - frequently abused,2026-01-15,Security Team
+gofile.io,File Sharing,High,Anonymous file hosting service,2026-01-15,Security Team
+filedropper.com,File Sharing,High,Anonymous file hosting - no account required,2026-01-15,Security Team
+sendspace.com,File Transfer,Medium,Unauthenticated file sharing service,2026-01-15,Security Team
+zippyshare.com,File Sharing,High,Anonymous file hosting service,2026-01-15,Security Team
+mediafire.com,Cloud Storage,Medium,Consumer file sharing - not enterprise approved,2026-01-15,Security Team
+4shared.com,Cloud Storage,Medium,Consumer file sharing service,2026-01-15,Security Team
+uploadfiles.io,File Sharing,High,Anonymous upload service,2026-01-15,Security Team
+file.io,File Transfer,High,Ephemeral anonymous file transfer,2026-01-15,Security Team
+paste.ee,Pastebin,High,Code/text paste site - data exfiltration vector,2026-01-15,Security Team
+pastebin.com,Pastebin,High,Frequently used for credential and data dumps,2026-01-15,Security Team
+hastebin.com,Pastebin,Medium,Anonymous text/code paste service,2026-01-15,Security Team
+privatebin.net,Pastebin,High,Encrypted pastebin - forensic recovery difficult,2026-01-15,Security Team
+temp.sh,File Transfer,Critical,Temporary anonymous file hosting,2026-02-01,Security Team
+bashupload.com,File Transfer,High,CLI-oriented anonymous file upload,2026-02-01,Security Team
+0x0.st,File Transfer,Critical,Anonymous file host commonly used in attacks,2026-02-01,Security Team

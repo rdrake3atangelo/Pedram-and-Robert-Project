@@ -1,9 +1,18 @@
+# macOS / Windows junk
 .DS_Store
 Thumbs.db
+
+# Editor/project settings
 .vscode/
 .idea/
+
+# Python/cache files
 __pycache__/
 *.pyc
+
+# Temporary files
 *.tmp
 *.log
+
+# Local Splunk config that should not be submitted
 local/

@@ -21,6 +21,7 @@ The framework includes four primary detection use cases:
 datasets/
   synthetic_dataset/     Synthetic exfiltration test dataset
   benign_dataset/        Benign validation dataset
+  generate_datasets/     Python file
 
 docs/
   project_proposal/  Original project proposal

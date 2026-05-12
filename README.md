@@ -24,10 +24,12 @@ datasets/
   generate_datasets/     Python file
 
 docs/
-  project_proposal/  Original project proposal
-  project_design/    Project design document
-  presentation/      Final presentation slides
-  progress_reports/  Progress reports 1–5
+  project_proposal/                  Original project proposal
+  project_design/                    Project design document
+  final_presentation/                Final presentation slides
+  progress_reports/                  Progress reports 1–5
+  final_design and implementation/   Final design document
+  user_manual/                       Manual for replicating our results    
 
 detections/
   SPL detection rules, reusable macro, and threshold configuration
@@ -62,8 +64,10 @@ evaluation/
 - `evaluation/tuning_log.md`
 - `evaluation/test_catalog.xlsx`
 - `docs/project_proposal/Proposal.pdf`
+- `docs/final_design_and_implementation/Final Design and Implementation.pdf`
+- `docs/user_manual/User Manual.pdf`
 - `docs/project_design/Project Design.pdf`
-- `docs/presentation/DLP Presentation.pptx`
+- `docs/final_presentation/Final DLP Presentation.pptx`
 - `docs/progress_reports/Progress Report 1.pdf`
 - `docs/progress_reports/Progress Report 2.pdf`
 - `docs/progress_reports/Progress Report 3.pdf`
